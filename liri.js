@@ -102,6 +102,8 @@ function doThis(){
 function logTxt() {
     if (query === undefined || query === null){
         query = '';
+    } else {
+        query = `'`+query+`'`
     }
     let timeStamp = new Date(Date.now()).toLocaleString()
     let fileMsg = 'node command: liri.js '+appService+' '+query+' run at: '+timeStamp+'\n';
