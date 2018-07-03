@@ -37,31 +37,27 @@ function myTweets(){
 
 function spotifyThis(query){
     if (query === '' || query === undefined || query === null) {
-        spotify.search({type: 'track', query: 'The+Sign+artist:ace+of+base', limit: '1'}, function(error, data){
-            if (!error) {
-                spotifyResults(data);
-            }
-        })
-    } else {
-        spotify.search({type: 'track', query: query, limit: '10'}, function(error, data){
-            if (!error) {
-                spotifyResults(data);
-            }
-        })
-    }
+        query = 'The+Sign+artist:ace+of+base';
+    } 
+
+    spotify.search({type: 'track', query: query, limit: '1'}, function(error, data){
+        if (!error) {
+            let songs = data.tracks.items
+            songs.forEach(element=> {
+                console.log('Artist: ',element.artists[0].name)
+                console.log('Album: ',element.album.name)
+                console.log('Track Name: ',element.name)
+                //(element.preview_url === null) ? console.log(true) : console.log(false)
+                if(element.preview_url === null) {
+                    console.log('preview: No preview available \n')
+                } else {
+                    console.log('Preview: ',element.preview_url,'\n')
+                }
+            });
+        }
+    })
 }
 
 function spotifyResults(data){
-    let songs = data.tracks.items
-    songs.forEach(element=> {
-        console.log('Artist: ',element.artists[0].name)
-        console.log('Album: ',element.album.name)
-        console.log('Track Name: ',element.name)
-        //(element.preview_url === null) ? console.log(true) : console.log(false)
-        if(element.preview_url === null) {
-            console.log('preview: No preview available \n')
-        } else {
-            console.log(element.preview_url,'\n')
-        }
-        });
+    
     };
