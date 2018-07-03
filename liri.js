@@ -1,4 +1,5 @@
 require('dotenv').config();
+let fs = require('fs');
 let Spotify = require('node-spotify-api');
 let Twitter = require('twitter');
 let request = require('request');
@@ -17,8 +18,8 @@ switch (appService) {
     break;
     case 'movie-this': movieThis(query);
     break;
-//     case 'do-what-it-says': doThis();
-//     break;
+    case 'do-what-it-says': doThis();
+    break;
     default: return console.log('try again with different input');
 }
 
@@ -84,3 +85,15 @@ function movieThis(query) {
         };
     });
 };
+
+function doThis(){
+    fs.readFile('./random.txt', 'utf8', function(error, data){
+        if(error){
+            console.log(error);
+        } else {
+            query = data.split(',')
+            spotifyThis(query[1])
+        }
+    })
+}
+ 
