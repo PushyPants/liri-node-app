@@ -59,21 +59,28 @@ function spotifyThis(query){
 }
 
 function movieThis(query) {
+    if(query === '' || query === undefined || query === null) {
+        query = 'Mr. Nobody'
+    }
     request('https://www.omdbapi.com/?t='+query+'&y=&plot=short&apikey=trilogy', function(error, response, body){
+        movieObj = JSON.parse(body);
+
         if (error) {
             console.log(error)
         } else {
-            //console.log(JSON.parse(body));
-            movieObj = JSON.parse(body);
-
-            console.log('Title: ',movieObj.Title);
-            console.log('Released: ',movieObj.Year);
-            console.log('IMDB Rating: ',movieObj.imdbRating);
-            console.log('Rotten Tomatoes Score: ',movieObj.Ratings[1].Value);
-            console.log('Produced in: ',movieObj.Country);
-            console.log('Language: ',movieObj.Language);
-            console.log('plot: ',movieObj.Plot);
-            console.log('actors: ',movieObj.Actors,'\n');
+            if (query === 'Mr. Nobody') {
+                console.log(`If you haven't watched "Mr. Nobody," you should: http://www.imdb.com/title/tt0485947`)
+                console.log(`It's on Netflix!`)
+            } else {
+                console.log('Title: ',movieObj.Title);
+                console.log('Released: ',movieObj.Year);
+                console.log('IMDB Rating: ',movieObj.imdbRating);
+                console.log('Rotten Tomatoes Score: ',movieObj.Ratings[1].Value);
+                console.log('Produced in: ',movieObj.Country);
+                console.log('Language: ',movieObj.Language);
+                console.log('plot: ',movieObj.Plot);
+                console.log('actors: ',movieObj.Actors,'\n');
+            }
         };
     });
 };
