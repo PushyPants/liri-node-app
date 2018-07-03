@@ -15,8 +15,8 @@ switch (appService) {
     break;
     case 'spotify-this-song': spotifyThis(query);
     break;
-//     case 'movie-this': movieThis(query);
-//     break;
+    case 'movie-this': movieThis(query);
+    break;
 //     case 'do-what-it-says': doThis();
 //     break;
     default: return console.log('try again with different input');
@@ -58,6 +58,22 @@ function spotifyThis(query){
     })
 }
 
-function spotifyResults(data){
-    
-    };
+function movieThis(query) {
+    request('https://www.omdbapi.com/?t='+query+'&y=&plot=short&apikey=trilogy', function(error, response, body){
+        if (error) {
+            console.log(error)
+        } else {
+            //console.log(JSON.parse(body));
+            movieObj = JSON.parse(body);
+
+            console.log('Title: ',movieObj.Title);
+            console.log('Released: ',movieObj.Year);
+            console.log('IMDB Rating: ',movieObj.imdbRating);
+            console.log('Rotten Tomatoes Score: ',movieObj.Ratings[1].Value);
+            console.log('Produced in: ',movieObj.Country);
+            console.log('Language: ',movieObj.Language);
+            console.log('plot: ',movieObj.Plot);
+            console.log('actors: ',movieObj.Actors,'\n');
+        };
+    });
+};
