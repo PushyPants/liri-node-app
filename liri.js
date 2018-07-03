@@ -11,6 +11,8 @@ let twitter = new Twitter(keys.twitter);
 let appService = process.argv[2];
 let query = process.argv[3];
 
+logTxt()
+
 switch (appService) {
     case 'my-tweets': myTweets();
     break;
@@ -93,6 +95,20 @@ function doThis(){
         } else {
             query = data.split(',')
             spotifyThis(query[1])
+        }
+    })
+}
+
+function logTxt() {
+    if (query === undefined || query === null){
+        query = '';
+    }
+    let timeStamp = new Date(Date.now()).toLocaleString()
+    let fileMsg = 'node command: liri.js '+appService+' '+query+' run at: '+timeStamp+'\n';
+
+    fs.appendFile('./log.txt', fileMsg , function(error){
+        if (error){
+            console.log(error);
         }
     })
 }
