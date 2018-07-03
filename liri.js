@@ -13,8 +13,8 @@ let query = process.argv[3];
 switch (appService) {
     case 'my-tweets': myTweets();
     break;
-//     case 'spotify-this-song': spotifyThis(query);
-//     break;
+    case 'spotify-this-song': spotifyThis(query);
+    break;
 //     case 'movie-this': movieThis(query);
 //     break;
 //     case 'do-what-it-says': doThis();
@@ -35,10 +35,33 @@ function myTweets(){
     })
 }
 
-// function spotifyThis(query){
-//     if (query === '') {
-//         //search ace of base, the sign
-//     } else {
-//         // query the query term
-//     }
-// }
+function spotifyThis(query){
+    if (query === '' || query === undefined || query === null) {
+        spotify.search({type: 'track', query: 'The+Sign+artist:ace+of+base', limit: '1'}, function(error, data){
+            if (!error) {
+                spotifyResults(data);
+            }
+        })
+    } else {
+        spotify.search({type: 'track', query: query, limit: '10'}, function(error, data){
+            if (!error) {
+                spotifyResults(data);
+            }
+        })
+    }
+}
+
+function spotifyResults(data){
+    let songs = data.tracks.items
+    songs.forEach(element=> {
+        console.log('Artist: ',element.artists[0].name)
+        console.log('Album: ',element.album.name)
+        console.log('Track Name: ',element.name)
+        //(element.preview_url === null) ? console.log(true) : console.log(false)
+        if(element.preview_url === null) {
+            console.log('preview: No preview available \n')
+        } else {
+            console.log(element.preview_url,'\n')
+        }
+        });
+    };
