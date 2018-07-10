@@ -15,10 +15,10 @@ Through the terminal, the user can call one of the specific commands to:
 Each time a command is entered, a function is run to log the command and the time it was run in a log.txt file. 
 
 ## Results:
-![](./images/twitter.png)
-![](./images/logFile.png)
-![](./images/noInput.png)
-![](./images/spotify.png)
-![](./images/SpotifyNull.png)
-![](./images/movie.png)
-![](./images/doWhat.png)
+![Twitter](./images/twitter.png)
+![Log File](./images/logFile.png)
+![No Input - default](./images/noInput.png)
+![Spotify search](./images/spotify.png)
+![Spotify - no input](./images/SpotifyNull.png)
+![Movie Search](./images/movie.png)
+![do-what command](./images/doWhat.png)
